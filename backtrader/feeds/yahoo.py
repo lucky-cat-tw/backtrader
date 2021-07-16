@@ -38,45 +38,28 @@ class YahooFinanceCSVData(feed.CSVDataBase):
     '''
     Parses pre-downloaded Yahoo CSV Data Feeds (or locally generated if they
     comply to the Yahoo format)
-
     Specific parameters:
-
       - ``dataname``: The filename to parse or a file-like object
-
       - ``reverse`` (default: ``False``)
-
         It is assumed that locally stored files have already been reversed
         during the download process
-
       - ``adjclose`` (default: ``True``)
-
         Whether to use the dividend/split adjusted close and adjust all
         values according to it.
-
       - ``adjvolume`` (default: ``True``)
-
         Do also adjust ``volume`` if ``adjclose`` is also ``True``
-
       - ``round`` (default: ``True``)
-
         Whether to round the values to a specific number of decimals after
         having adjusted the close
-
       - ``roundvolume`` (default: ``0``)
-
         Round the resulting volume to the given number of decimals after having
         adjusted it
-
       - ``decimals`` (default: ``2``)
-
         Number of decimals to round to
-
       - ``swapcloses`` (default: ``False``)
-
         [2018-11-16] It would seem that the order of *close* and *adjusted
         close* is now fixed. The parameter is retained, in case the need to
         swap the columns again arose.
-
     '''
     lines = ('adjclose',)
 
@@ -182,7 +165,6 @@ class YahooLegacyCSV(YahooFinanceCSVData):
     '''
     This is intended to load files which were downloaded before Yahoo
     discontinued the original service in May-2017
-
     '''
     params = (
         ('version', ''),
@@ -197,48 +179,30 @@ class YahooFinanceData(YahooFinanceCSVData):
     '''
     Executes a direct download of data from Yahoo servers for the given time
     range.
-
     Specific parameters (or specific meaning):
-
       - ``dataname``
-
         The ticker to download ('YHOO' for Yahoo own stock quotes)
-
       - ``proxies``
-
         A dict indicating which proxy to go through for the download as in
         {'http': 'http://myproxy.com'} or {'http': 'http://127.0.0.1:8080'}
-
       - ``period``
-
         The timeframe to download data in. Pass 'w' for weekly and 'm' for
         monthly.
-
       - ``reverse``
-
         [2018-11-16] The latest incarnation of Yahoo online downloads returns
         the data in the proper order. The default value of ``reverse`` for the
         online download is therefore set to ``False``
-
       - ``adjclose``
-
         Whether to use the dividend/split adjusted close and adjust all values
         according to it.
-
       - ``urlhist``
-
         The url of the historical quotes in Yahoo Finance used to gather a
         ``crumb`` authorization cookie for the download
-
       - ``urldown``
-
         The url of the actual download server
-
       - ``retries``
-
         Number of times (each) to try to get a ``crumb`` cookie and download
         the data
-
       '''
 
     params = (
